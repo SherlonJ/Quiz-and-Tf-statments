@@ -1,0 +1,140 @@
+import random
+import turtle as trtl
+import leaderboard as l
+score = 0
+wn = trtl.Screen()
+wn.bgcolor("orange")
+# Quiz Questions & Answers
+List_of_question = ["Who was the first President of the United States?", "Who was the 2nd President of the United States?", "Who was the President of the United States during the majority of the Civil War?", "What are the official names of the two political parties that have controlled every Presidency since 1853?", "Who was President of the United States when the September 11th, 2001 attacks occurred?", "Who was the first Black President?", "Who was the first female Vice President?", "Who won the Presidential election of 1800?", "What is the leader of the Party in control of the United States Senate called?", "Who is the President and leader of the United States House of Representatives?", "What is the Vice President of either Congressional chamber called?", "Who replaced President Abraham Lincoln when he was assassinated in 1865?", "Which President is the only President to surpass 2 terms in office?", "How many Amendments to the United States Constitution have there been?", "Which President was famous for declaring 'The government should not serve the people. The people should serve the government.'?", "What was the formal name of the ObamaCare legislation passed by Congress under President Barack Obama?", "Who is the only President in American history to resign from office?", "Which President is the only President in American history to be impeached and sent to trial twice?", "How many members does the United States House of Representatives have?", "How many members does the United States Senate have?", "Who served as President Andrew Jackson's Vice President between 1829 and 1832?", "Who was the first President to declare war?", "Which Civil War battle is known as the bloodiest single-day battle in American history?", "In what year was the Emancipation Proclamation signed?", "About how many Native Americans were forcibly relocated by the government under the Indian Removal Act?", "Who was the shortest-serving President at just 31 days of power?", "Who was the only Confederate President?", "Who wrote the Common Sense pamphlet that would inspire much support for American independence?", "Who was Republican Richard M. Nixon's Vice Presidential candidate in the 1960 Presidential election?", "Who was President George W. Bush's (2001-2009) Vice President?", "What is it called when an elector in the Electoral College votes against the candidate who won his/her state?", "Who was the first President of the Continental Congress following the American Revolution?", "Who did President Richard M. Nixon defeat in the 1972 Presidential Election?", "Who competed against, and lost to, President Abraham Lincoln in the 1864 Presidential Election?", "What was the final EV count of the 2000 Presidential election? (Answer with the letter!) \n A. 271 - 267 \n B. 271 - 266 \n C. 273 - 265 \n D. 303 - 235", "In what year was President Bill Clinton impeached and sent to trial in the Senate?", "In what year was President Andrew Jackson elected?", "In what year was President John F. Kennedy assassinated?", "At what AGE was President Franklin D. Roosevelt when he first came down with symptoms that would eventually lead to his polio diagnosis?", "How many years is a single House of Representatives term?", "How many years is a single Senator term?"]
+
+# 40 questions completed, 10 per difficulty level
+
+List_of_answers= ["George Washington", "John Adams", "Abraham Lincoln", "Republican Party and Democratic Party", "George W. Bush", "Barack Obama", "Kamala Harris", "Thomas Jefferson", "Senate Majority Leader", "Speaker", "Pro Tempore", "Andrew Johnson", "Franklin Roosevelt", "27", "Grover Cleveland", "Affordable Care Act", "Richard Nixon", "Donald Trump", "435", "100", "John C. Calhoun", "James Madison", "Battle of Antietam", "1863", "100,000", "William Henry Harrison", "Jefferson Davis", "Thomas Paine", "Henry Cabot Lodge", "Dick Cheney", "Faithless Elector", "John Hanson", "George McGovern", "George B. McClellan", "B", "1998", "1828", "1963", "39", "2", "6"]
+#Create Turtles
+
+def main_menu():
+    print("+------------------------------+")
+    print("|      American History!       |")
+    print("+------------------------------+")
+    print("|                              |")
+    print("| 1. Play True or False quiz   |")
+    print("| 2. Play American History quiz|  ")
+    print("| 3. Quit                      |")
+    print("|                              |")    
+    print("+------------------------------+")
+    print()
+    menu_choice = input("Enter a selection from the menu (1, 2 or 3): ")
+
+    if menu_choice == "1":
+        play_tof_quiz()
+    elif menu_choice == "2":
+          #print the difficulty level
+      print("How many questions you want asked? The options are Short, Medium, and Long. Extra : Quit")
+      difficulty = input()
+      if difficulty == "short" or difficulty == "Short":
+        play_my_quiz(10)
+      if difficulty == "medium" or difficulty == "Medium":
+        play_my_quiz(20)
+      if difficulty == "long" or difficulty =="Long":
+        play_my_quiz(30)
+      if difficulty == "quit" or difficulty == "Quit":
+        play_my_quiz(100)
+    else:
+        print("What a noob. Bye.")
+        quit()
+
+
+# Add True or False Statements to list
+def generate_tof_statements():
+    statements = []
+    statements.append(["Coding is fun.", "True", "\n"])
+    statements.append(["Maggots are nice.", "False"])
+    statements.append(["The Louisiana Territory was sold to the U.S by Napoleon.", "True", "\n"])
+    statements.append(["The Spanish-American War took place in the 1840s.", "False", "\n"])
+    statements.append([" When Texas joined the Union, it maintained the right to secede whenever it wanted.", "False", "\n"])
+    statements.append(["Japan invaded Alaska during World War II.", "True"])
+    statements.append(["Abraham Lincoln didn't care so much about winning the Civil War, only about freeing slaves.","False", "\n"])
+    statements.append(["Aaron Burr was Vice President when he shot Alexander Hamilton.", "True", "\n"])
+    statements.append(["Native Americans gained the right to vote before women.", "False", "\n"])
+    statements.append(["New York City was original founded by Denmark.", "False", "\n"])
+    statements.append(["Hawaii was the most recent state added to the Union.", "True", "\n"])
+    statements.append(["The White House burned down in the early 1800s.", "True"])
+    statements.append(["The first state to join the Union after the 13 colonies was Kentucky.", "False", "\n"])
+    statements.append(["John F. Kennedy was a Democrat.", "True", "\n"])
+    statements.append(["Richard Nixon was the second president to ever be impeached.", "False", "\n"])
+    statements.append(["Thomas Edison was born in the United States", "True", "\n"])
+    statements.append(["Of the 172 people who were accused of witchcraft in Salem, only one survived.", "False", "\n"])
+    statements.append(["The Trail of Tears mostly affected the Sioux.", "False", "\n"])
+    statements.append(["The Empire State Building was tallest in the world when constructed", "True", "\n"])
+    statements.append(["In 1800, the second largest city in the U.S was Philadelphia.", "True", "\n"])
+    statements.append(["General George Armstrong Custer's troops were victorious at the Battle of Little Bighorn.", "False", "\n"])
+    statements.append(["Nearly 1 million African Americans migrated from the American South during the 1920s.", "True", "\n"])
+    statements.append(["Working conditions in American factories were often worse than in British ones.", "False", "\n"])
+    statements.append(["John Adams was America's third President.", "False", "\n"])
+    statements.append(["America has been at war with every modernly internationally recognized country.", "False", "\n"])
+    statements.append(["Monaco is the 2nd smallest country in the world.", "False", "\n"])
+  
+
+    #use par and compare two par 
+    random.shuffle(statements)
+    return statements
+
+#Start True Or false statements game
+def play_tof_quiz():
+    statements = generate_tof_statements()
+
+    for s in statements:
+        print("Statement: " + s[0])
+        answer = input("Is this True or False? ")
+        if answer == s[1]:
+            update_score()
+            print("Correct! score added:+1", " current score:" + str(score), "\n") 
+        else:
+            print("Incorrect :(\n")
+            #print("You scored: " + str(score))
+
+#Start American History Quiz
+def play_my_quiz(num):
+  #Questions to be displayed
+  if num > len(List_of_question):
+    print("Ending Game")
+    quit()
+  count = 0
+  while count < num:
+   print(List_of_question[count])
+   user_response = input()
+   #Checks if the user answered correctly
+   if user_response in List_of_answers:
+    print(" ")
+    update_score()
+    print("Correct! score added:+1", " current score:" + str(score), "\n") 
+   #Checks if the user answered incorrectly
+   else:
+    print(" ")
+    print("Incorrect, the correct answer was:" + " " + List_of_answers[count] + ".", " score added: 0 ", "current score:" + str(score), "\n")
+   count = count + 1
+   
+ 
+ #updates the score if user gets the questions correct
+#Score
+def update_score():
+  global score
+  score = score + 1
+   
+ 
+print()
+
+
+
+
+main_menu()
+
+
+
+
+
+
+
+
+#num = trtl.textinput("American History Quiz", 'How many Question Do you want to answer')
+#num = int(num)
